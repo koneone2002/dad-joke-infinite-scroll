@@ -56,6 +56,23 @@ function showLoading() {
     }, 300);
   }, 1000);
 }
+// Filter jokes by input
+function filterJokes(e) {
+  console.log(e.target.value);
+
+  const term = e.target.value.toUpperCase();
+  const jokes = document.querySelectorAll('.post');
+
+  jokes.forEach(joke => {
+    const body = joke.querySelector('.post-body').innerText.toUpperCase();
+
+    if (body.indexOf(term) > -1) {
+      joke.style.display = 'flex';
+    } else {
+      joke.style.display = 'none';
+    }
+  });
+}
 // Show jokes
 showJokes();
 
@@ -66,3 +83,5 @@ window.addEventListener('scroll', () => {
     showLoading();
   }
 });
+
+filter.addEventListener('input', filterJokes);
